@@ -1,0 +1,73 @@
+server:
+  port: 8084
+  tomcat:
+    basedir: /home/gopathdev1/microservices/tomcat/gpis-billing
+    accesslog:
+      enabled: true
+      directory: logs
+      prefix: access_log
+      suffix: .log
+      file-date-format: .yyyy-MM-dd
+      pattern: '%h %l %u %t "%r" %s %b'
+spring:
+  application:
+    name: gopath-gpis-billing
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://gopath-db-dev1.mysql.database.azure.com:3306/gpis_devdb?useSSL=true&serverTimezone=UTC
+    username: gpadmindev1
+
+    dbcp2:
+      initial-size: 20
+      min-idle: 2
+      max-idle: 5
+      max-wait-millis: 10000
+      validation-query: SELECT 1
+      default-auto-commit: false
+      time-between-eviction-runs-millis: 3600000
+      min-evictable-idle-time-millis: 3600000
+      test-on-borrow: false
+  jpa:
+    database: MYSQL
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+
+root:
+  system: /home/gopathdev1/microservices
+  backup: /home/gopathdev1/microservices
+
+security:
+  aes:
+    key:
+      location: ${root.system}/conf/security.key
+  db.password: ZRWha/xqJK6JD+oDPUG71mqdWyE+XkUBR3syzylxbuI
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://system:gOpatHmiCro@localhost:12121/eureka  # URL of the Eureka server
+    register-with-eureka: true  # Register this service with Eureka
+    fetch-registry: true  # Fetch the registry to discover other services (optional, set to false if not needed)
+  instance:
+    prefer-ip-address: true  # Prefer IP address over hostname for registration
+
+billing:
+  uti:
+    auto-send-kareo: no
+    sftp-kareo: yes
+
+prop:
+  upload-folder: /mnt/gopath-dev1-fs/
+
+domain:
+  backend: https://test.gopathdigital.com/basic-api
