@@ -50,7 +50,7 @@ security:
   aes:
     key:
       location: ${root.system}/conf/security.key
-  db.password: or7CmAU05p5ok7uVbLwe+kimqmOAfgzU2D74zsb00Nw
+  db.password: G9hjyTd8WZIzQiFgLsyhuBQVB18PbtvSG9mDhBpVOhDOmSCwJbGdUvVFuLx2a9hZ
 
 eureka:
   client:
